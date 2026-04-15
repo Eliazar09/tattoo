@@ -1,4 +1,4 @@
-const PEXELS_KEY = import.meta.env.VITE_PEXELS_KEY as string
+const PEXELS_KEY = 'HX6lpZGO3pQmUX3XKKiI7DYLHvnu0JUSjWlIgIHe6bMiZunPISPD1l4Q'
 
 export interface PexelsPhoto {
   id: number
