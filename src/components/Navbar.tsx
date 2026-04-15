@@ -49,17 +49,29 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
 
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-7">
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              className={`text-sm font-medium font-body tracking-wide transition-all duration-200 hover:opacity-60 ${
-                dark ? 'text-white' : 'text-black'
-              } ${isActive(l.href) ? 'border-b border-current pb-px' : ''}`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.href.startsWith('/#') ? (
+              <a
+                key={l.label}
+                href={l.href}
+                className={`text-sm font-medium font-body tracking-wide transition-all duration-200 hover:opacity-60 ${
+                  dark ? 'text-white' : 'text-black'
+                }`}
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                key={l.label}
+                to={l.href}
+                className={`text-sm font-medium font-body tracking-wide transition-all duration-200 hover:opacity-60 ${
+                  dark ? 'text-white' : 'text-black'
+                } ${isActive(l.href) ? 'border-b border-current pb-px' : ''}`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
         </div>
 
         {/* CTA + Hamburger */}
@@ -87,16 +99,27 @@ export default function Navbar({ dark = false }: { dark?: boolean }) {
       {/* Mobile Menu */}
       {open && (
         <div className={`md:hidden mt-2 rounded-xl px-5 py-4 flex flex-col gap-4 ${dark ? 'glass-dark-solid' : 'glass-dark'}`}>
-          {links.map((l) => (
-            <a
-              key={l.label}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className={`text-sm font-medium font-body tracking-wide ${dark ? 'text-white' : 'text-black'}`}
-            >
-              {l.label}
-            </a>
-          ))}
+          {links.map((l) =>
+            l.href.startsWith('/#') ? (
+              <a
+                key={l.label}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className={`text-sm font-medium font-body tracking-wide ${dark ? 'text-white' : 'text-black'}`}
+              >
+                {l.label}
+              </a>
+            ) : (
+              <Link
+                key={l.label}
+                to={l.href}
+                onClick={() => setOpen(false)}
+                className={`text-sm font-medium font-body tracking-wide ${dark ? 'text-white' : 'text-black'}`}
+              >
+                {l.label}
+              </Link>
+            )
+          )}
           <Link
             to="/agendamento"
             onClick={() => setOpen(false)}
